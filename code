@@ -1,114 +1,143 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Farm Fertilizer Advisor</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f7fdee;
-        }
-    </style>
-</head>
-<body class="min-h-screen flex items-center justify-center p-4">
+import tkinter as tk
 
-    <div class="w-full max-w-lg bg-white shadow-xl rounded-2xl p-6 md:p-10 border-t-8 border-green-600">
+def main():
+    root = tk.Tk()
+    root.title("Fertilizer Advisor")
+    root.geometry("700x600")
+    
+    n_data = {
+        "name": "Nitrogen",
+        "color": "green",
+        "desc": "Nitrogen is for vegetative growth, promoting leaves and stems.",
+        "ferts": ["Urea (46-0-0)", "Ammonium Nitrate"],
+        "benefits": ["Leaf growth", "Green color", "Protein synthesis"],
+        "symptoms": ["Yellow leaves", "Small plants"]
+    }
+    
+    p_data = {
+        "name": "Phosphorus", 
+        "color": "orange",
+        "desc": "Phosphorus helps roots, flowers and fruits grow.",
+        "ferts": ["Triple Superphosphate (0-46-0)", "DAP (18-46-0)"],
+        "benefits": ["Root growth", "Flowers", "Fruits"],
+        "symptoms": ["Purple leaves", "Bad roots"]
+    }
+    
+    k_data = {
+        "name": "Potassium",
+        "color": "red", 
+        "desc": "Potassium makes plants strong against disease and drought.",
+        "ferts": ["Muriate of Potash (0-0-60)", "Potassium Sulfate"],
+        "benefits": ["Disease fight", "Drought tolerance", "Fruit quality"],
+        "symptoms": ["Burned edges", "Weak stems"]
+    }
+    
+    all_data = {"N": n_data, "P": p_data, "K": k_data}
+    
+    title = tk.Label(root, text="Fertilizer Advisor", font=("Arial", 20))
+    title.pack(pady=10)
+    
+    sub = tk.Label(root, text="Pick what your soil needs most:")
+    sub.pack()
+    
+    frame = tk.Frame(root)
+    frame.pack(pady=20)
+    
+    n_btn = tk.Button(frame, text="N\nNitrogen", bg="green", fg="white", width=10, height=3)
+    n_btn.grid(row=0, column=0, padx=10)
+    
+    p_btn = tk.Button(frame, text="P\nPhosphorus", bg="orange", fg="white", width=10, height=3)
+    p_btn.grid(row=0, column=1, padx=10)
+    
+    k_btn = tk.Button(frame, text="K\nPotassium", bg="red", fg="white", width=10, height=3)
+    k_btn.grid(row=0, column=2, padx=10)
+    
+    result_frame = tk.Frame(root, bg="lightgray")
+    result_frame.pack(pady=20, padx=20, fill="both", expand=True)
+    
+    start_label = tk.Label(result_frame, text="Click N, P or K for advice!", bg="lightblue")
+    start_label.pack(pady=50)
+    
+    title_label = tk.Label(result_frame, font=("Arial", 16))
+    desc_label = tk.Label(result_frame, wraplength=500)
+    fert_label = tk.Label(result_frame, wraplength=500)
+    benefit_label = tk.Label(result_frame, wraplength=500)
+    symptom_label = tk.Label(result_frame, wraplength=500)
+    
+    def show_n():
+        for widget in result_frame.winfo_children():
+            widget.pack_forget()
+        
+        data = all_data["N"]
+        title_label.config(text=f"{data['name']} Advice", fg=data['color'])
+        title_label.pack(pady=10)
+        
+        desc_label.config(text=data['desc'])
+        desc_label.pack(pady=5)
+        
+        fert_text = "Use: " + ", ".join(data['ferts'])
+        fert_label.config(text=fert_text)
+        fert_label.pack(pady=5)
+        
+        benefit_text = "Good for: " + ", ".join(data['benefits'])
+        benefit_label.config(text=benefit_text)
+        benefit_label.pack(pady=5)
+        
+        symptom_text = "Look for: " + ", ".join(data['symptoms'])
+        symptom_label.config(text=symptom_text)
+        symptom_label.pack(pady=5)
+    
+    def show_p():
+        for widget in result_frame.winfo_children():
+            widget.pack_forget()
+        
+        data = all_data["P"]
+        title_label.config(text=f"{data['name']} Advice", fg=data['color'])
+        title_label.pack(pady=10)
+        
+        desc_label.config(text=data['desc'])
+        desc_label.pack(pady=5)
+        
+        fert_text = "Use: " + ", ".join(data['ferts'])
+        fert_label.config(text=fert_text)
+        fert_label.pack(pady=5)
+        
+        benefit_text = "Good for: " + ", ".join(data['benefits'])
+        benefit_label.config(text=benefit_text)
+        benefit_label.pack(pady=5)
+        
+        symptom_text = "Look for: " + ", ".join(data['symptoms'])
+        symptom_label.config(text=symptom_text)
+        symptom_label.pack(pady=5)
+    
+    def show_k():
+        for widget in result_frame.winfo_children():
+            widget.pack_forget()
+        
+        data = all_data["K"]
+        title_label.config(text=f"{data['name']} Advice", fg=data['color'])
+        title_label.pack(pady=10)
+        
+        desc_label.config(text=data['desc'])
+        desc_label.pack(pady=5)
+        
+        fert_text = "Use: " + ", ".join(data['ferts'])
+        fert_label.config(text=fert_text)
+        fert_label.pack(pady=5)
+        
+        benefit_text = "Good for: " + ", ".join(data['benefits'])
+        benefit_label.config(text=benefit_text)
+        benefit_label.pack(pady=5)
+        
+        symptom_text = "Look for: " + ", ".join(data['symptoms'])
+        symptom_label.config(text=symptom_text)
+        symptom_label.pack(pady=5)
+    
+    n_btn.config(command=show_n)
+    p_btn.config(command=show_p)
+    k_btn.config(command=show_k)
+    
+    root.mainloop()
 
-        <h1 class="text-3xl font-bold text-gray-800 mb-2">Fertilizer Advisor</h1>
-        <p class="text-gray-600 mb-6">Which primary nutrient is your soil lacking the most?</p>
-
-        <div class="grid grid-cols-3 gap-4 mb-8">
-            <button id="btnN" data-nutrient="N" 
-                    class="nutrient-btn bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-4 rounded-xl transition duration-150 shadow-md">
-                N <span class="text-sm block">Nitrogen</span>
-            </button>
-            <button id="btnP" data-nutrient="P" 
-                    class="nutrient-btn bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-3 px-4 rounded-xl transition duration-150 shadow-md">
-                P <span class="text-sm block">Phosphorus</span>
-            </button>
-            <button id="btnK" data-nutrient="K" 
-                    class="nutrient-btn bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-4 rounded-xl transition duration-150 shadow-md">
-                K <span class="text-sm block">Potassium</span>
-            </button>
-        </div>
-
-        <div id="adviceOutput" class="p-6 bg-gray-50 border border-gray-200 rounded-xl hidden">
-            <h2 id="adviceTitle" class="text-xl font-bold mb-3 text-green-700"></h2>
-            <p id="adviceText" class="text-gray-700"></p>
-            <p id="ratioText" class="text-sm mt-3 font-medium text-gray-500"></p>
-        </div>
-
-        <div id="initialMessage" class="p-6 bg-blue-100 border border-blue-300 text-blue-800 rounded-xl">
-            Click on N, P, or K above to get your custom fertilizer recommendation!
-        </div>
-
-    </div>
-
-    <script>
-        const nutrientButtons = document.querySelectorAll('.nutrient-btn');
-
-        function giveFertilizerAdvice(nutrient) {
-            const adviceOutput = document.getElementById('adviceOutput');
-            const adviceTitle = document.getElementById('adviceTitle');
-            const adviceText = document.getElementById('adviceText');
-            const ratioText = document.getElementById('ratioText');
-            const initialMessage = document.getElementById('initialMessage');
-
-            let title = "";
-            let text = "";
-            let ratio = "";
-            let borderColor = "border-green-600";
-
-            if (nutrient === "N") {
-                title = "Nitrogen (N) Recommendation";
-                text = "Nitrogen is essential for **vegetative growth**, promoting big, green leaves and strong stems. This is vital for leafy vegetables and grasses.";
-                ratio = "Recommendation: Use a high-N fertilizer like **Urea (46-0-0)** or **Ammonium Nitrate**. These materials have a high first number and promote rapid growth.";
-                borderColor = "border-green-500";
-            }
-            
-            if (nutrient === "P") {
-                title = "Phosphorus (P) Recommendation";
-                text = "Phosphorus promotes **root development, flowering, and fruiting**. It is crucial during planting, early growth stages, and when the plant is setting fruit.";
-                ratio = "Recommendation: Use a high-P fertilizer like **Triple Superphosphate (0-46-0)** or **DAP (18-46-0)**. These materials have a high second number.";
-                borderColor = "border-yellow-500";
-            }
-            
-            if (nutrient === "K") {
-                title = "Potassium (K) Recommendation";
-                text = "Potassium (Potash) is the **'health booster'** that helps plants fight disease, tolerate drought, and improve the quality and ripening of fruits and vegetables.";
-                ratio = "Recommendation: Use a high-K fertilizer like **Muriate of Potash (MOP, 0-0-60)** or **Potassium Sulfate**. These materials have a high third number.";
-                borderColor = "border-red-500";
-            }
-            
-            adviceTitle.textContent = title;
-            adviceText.innerHTML = text;
-            ratioText.textContent = ratio;
-
-            adviceOutput.classList.remove('hidden', 'border-green-600', 'border-yellow-600', 'border-red-600');
-            adviceOutput.classList.add(borderColor);
-            initialMessage.classList.add('hidden');
-        }
-
-        nutrientButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                nutrientButtons.forEach(btn => btn.classList.remove('ring-4', 'ring-opacity-50'));
-
-                if (button.dataset.nutrient === 'N') {
-                    button.classList.add('ring-4', 'ring-green-300');
-                } else if (button.dataset.nutrient === 'P') {
-                    button.classList.add('ring-4', 'ring-yellow-300');
-                } else if (button.dataset.nutrient === 'K') {
-                    button.classList.add('ring-4', 'ring-red-300');
-                }
-                
-                const selectedNutrient = this.getAttribute('data-nutrient');
-                giveFertilizerAdvice(selectedNutrient);
-            });
-        });
-
-    </script>
-</body>
-</html>
+if __name__ == "__main__":
+    main()
